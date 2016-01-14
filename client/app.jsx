@@ -1,11 +1,24 @@
 // App component - represents the whole app
 App = React.createClass({
-  getTasks() {
-    return Tasks.find().fetch()
+  
+  
+  // getTasks() {
+  //   return Tasks.find().fetch()
+  // },
+  // renderTasks() {
+  //   return this.getTasks().map((task) => {
+  //     return <Task key={task._id} task={task} />;
+  //   });
+  // },
+  
+  mixins: [ReactMeteorData], 
+  getMeteorData() {
+    return {
+      tasks: Tasks.find({}).fetch()
+    }
   },
-
   renderTasks() {
-    return this.getTasks().map((task) => {
+    return this.data.tasks.map((task) => {
       return <Task key={task._id} task={task} />;
     });
   },
